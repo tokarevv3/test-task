@@ -2,8 +2,7 @@ package service;
 
 import dao.EmployeeDao;
 import dto.EmployeeDto;
-import entity.Employee;
-
+import dto.NewEmployeeDto;
 import java.util.List;
 import java.util.Optional;
 
@@ -30,13 +29,11 @@ public class EmployeeService {
         );
     }
 
-
-    public List<EmployeeDto> groupByName() {
+    public List<NewEmployeeDto> groupByName() {
         return employeeDao.groupByName().stream().map(
-                employee -> new EmployeeDto(
+                employee -> new NewEmployeeDto(
                         employee.getId(),
-                        employee.getFirstName(),
-                        employee.getLastName(),
+                        employee.getFullName(),
                         employee.getDateOfBirth()
                 )).collect(toList());
     }
