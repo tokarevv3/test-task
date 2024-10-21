@@ -19,10 +19,8 @@ public class EmployeeDao {
     public static final String FIND_BY_ID = "SELECT * FROM Employee WHERE id=?";
 
     public static final String GROUP_BY_NAME = """
-                                               SELECT id, STRING_AGG(firstName || ' ' || lastName, ', ') AS fullName, dateOfBirth,  department, salary
-                                               FROM employee
-                                               GROUP BY id
-                                               ORDER BY id;
+                                               SELECT firstname, count(*) FROM employee
+                                               GROUP BY firstname;
                                                """;
 
     public static final String FIND_BETWEEN = "SELECT * FROM Employee WHERE dateOfBirth BETWEEN ? AND ?";
@@ -63,13 +61,13 @@ public class EmployeeDao {
     }
 
     public List<Employee> findBetween(String first, String second) {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        var dateFormat = new SimpleDateFormat("dd-MM-yyyy");
         Timestamp firstTimestamp;
         Timestamp secondTimestamp;
 
         try {
-            java.util.Date firstDate = dateFormat.parse(first);
-            java.util.Date secondDate = dateFormat.parse(second);
+            var firstDate = dateFormat.parse(first);
+            var secondDate = dateFormat.parse(second);
             firstTimestamp = new Timestamp(firstDate.getTime());
             secondTimestamp = new Timestamp(secondDate.getTime());
         } catch (ParseException e) {
@@ -111,10 +109,7 @@ public class EmployeeDao {
 
     private static NewEmployee buildNewEmployee(ResultSet resultSet) throws SQLException {
         return new NewEmployee(
-                resultSet.getObject("id", Integer.class),
-                resultSet.getObject("fullName", String.class),
-                resultSet.getObject("dateOfBirth", Timestamp.class).toLocalDateTime(),
-                resultSet.getObject("department", String.class),
-                resultSet.getObject("salary", Integer.class));
+                resultSet.getObject("firstName", String.class),
+                resultSet.getObject("count", Long.class));
     }
 }

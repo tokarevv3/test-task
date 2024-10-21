@@ -1,12 +1,11 @@
 package service;
 
 import dao.EmployeeDao;
-import dto.EmployeeDto;
-import dto.NewEmployeeDto;
+import entity.Employee;
+import entity.NewEmployee;
+
 import java.util.List;
 import java.util.Optional;
-
-import static java.util.stream.Collectors.toList;
 
 public class EmployeeService {
 
@@ -18,34 +17,17 @@ public class EmployeeService {
 
     }
 
-    public Optional<EmployeeDto> findById(int id) {
-        return employeeDao.findById(id).map(employee ->
-                new EmployeeDto(
-                        employee.getId(),
-                        employee.getFirstName(),
-                        employee.getLastName(),
-                        employee.getDateOfBirth()
-                )
-        );
+    public Optional<Employee> findById(int id) {
+        return employeeDao.findById(id);
     }
 
-    public List<NewEmployeeDto> groupByName() {
-        return employeeDao.groupByName().stream().map(
-                employee -> new NewEmployeeDto(
-                        employee.getId(),
-                        employee.getFullName(),
-                        employee.getDateOfBirth()
-                )).collect(toList());
+    public List<NewEmployee> groupByName() {
+        return employeeDao.groupByName();
     }
 
-    public List<EmployeeDto> findBetween(String first, String second) {
-        return employeeDao.findBetween(first, second).stream().map(
-                employee -> new EmployeeDto(
-                        employee.getId(),
-                        employee.getFirstName(),
-                        employee.getLastName(),
-                        employee.getDateOfBirth()
-                )).collect(toList());
+    // date format 'dd-MM-yyyy'
+    public List<Employee> findBetween(String first, String second) {
+        return employeeDao.findBetween(first, second);
     }
 
     public static EmployeeService getInstance() {

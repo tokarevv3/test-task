@@ -6,8 +6,8 @@ import static database.Table.insertValues;
 public class Main {
     public static void main(String[] args) {
         // create and fill database
-        System.out.println(createTable());
-        System.out.println(insertValues());
+//        System.out.println(createTable());
+//        System.out.println(insertValues());
 
         // task 2.1
         var employeeById = EmployeeService.getInstance().findById(11);
@@ -18,7 +18,7 @@ public class Main {
         System.out.println(employeesByName);
 
         // task 2.3
-        var employeesBetween = EmployeeService.getInstance().findBetween("01-01-2000", "31-12-2004");
+        var employeesBetween = EmployeeService.getInstance().findBetween("01-01-2000", "30-12-2004");
         System.out.println(employeesBetween);
     }
 }
