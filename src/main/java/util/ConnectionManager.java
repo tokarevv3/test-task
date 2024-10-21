@@ -7,7 +7,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-@UtilityClass // Указывает что это утилитный класс, добавляет final и private конструктор
+@UtilityClass
 public class ConnectionManager {
 
     public static final String URL_KEY = "db.url";
@@ -26,7 +26,7 @@ public class ConnectionManager {
         }
     }
 
-    @SneakyThrows // Автоматически подставляет try-catch
+    @SneakyThrows
     public static Connection get() {
         return DriverManager.getConnection(
                 PropertiesUtil.get(URL_KEY),
