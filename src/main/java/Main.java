@@ -6,8 +6,8 @@ import static database.Table.insertValues;
 public class Main {
     public static void main(String[] args) {
         // create and fill database
-//        System.out.println(createTable());
-//        System.out.println(insertValues());
+        System.out.println(createTable());
+        System.out.println(insertValues());
 
         // task 2.1
         var employeeById = EmployeeService.getInstance().findById(11);
