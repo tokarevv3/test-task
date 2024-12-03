@@ -25,7 +25,7 @@ public class EmployeeService {
         return employeeDao.groupByName();
     }
 
-    // date format 'dd-MM-yyyy'
+    // date format "dd-MM-yyyy"
     public List<Employee> findBetween(String first, String second) {
         return employeeDao.findBetween(first, second);
     }
